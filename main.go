@@ -32,7 +32,14 @@ func getNotes(c *gin.Context) {
 	if err = cursor.All(context.TODO(), &notes); err != nil {
 		log.Fatal(err)
 	}
-	c.IndentedJSON(http.StatusOK, notes)
+	if notes != nil {
+	c.IndentedJSON(http.StatusOK, notes) 
+    }else{
+		c.AbortWithStatusJSON(http.StatusBadRequest,
+			gin.H{
+				"error": "DB is empty"})
+			return
+	}
 
 	err = client.Disconnect(context.TODO())
 	if err != nil {
