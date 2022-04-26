@@ -18,7 +18,7 @@ type Note struct {
 }
 
 func getNotes(c *gin.Context) {
-    clientOptions := options.Client().ApplyURI("")
+	clientOptions := options.Client().ApplyURI(${{ secrets.db_uri }})
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
 		log.Fatal(err)
@@ -41,7 +41,7 @@ func getNotes(c *gin.Context) {
 	
 }
 func addNotes(c *gin.Context) {
-	clientOptions := options.Client().ApplyURI("")
+	clientOptions := options.Client().ApplyURI(${{ secrets.db_uri }})
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
 		log.Fatal(err)
@@ -72,7 +72,7 @@ func addNotes(c *gin.Context) {
   }
 
 func deleteNotes(c *gin.Context) {
-	clientOptions := options.Client().ApplyURI("")
+	clientOptions := options.Client().ApplyURI(${{ secrets.db_uri }})
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	b := c.Param("id")
 	if err != nil {
