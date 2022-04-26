@@ -36,9 +36,9 @@ func getNotes(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, notes) 
     }else{
 		c.AbortWithStatusJSON(http.StatusBadRequest,
-			gin.H{
-				"error": "DB is empty"})
-			return
+		gin.H{
+			"error": "DB is empty"})
+		return
 	}
 
 	err = client.Disconnect(context.TODO())
