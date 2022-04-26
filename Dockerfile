@@ -10,5 +10,4 @@ RUN go mod init golang
 RUN go mod tidy
 
 EXPOSE 8080
-EXPOSE 1123123123
 ENTRYPOINT [ "go", "run", "main.go" ]
