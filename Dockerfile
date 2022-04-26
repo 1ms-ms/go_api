@@ -1,7 +1,14 @@
+# syntax=docker/dockerfile:1
+
 FROM golang:1.18
+
 WORKDIR /app
-COPY main.go go.mod go.sum ./
-RUN go mod download
-EXPOSE 8080/tcp
-RUN go get ./...
+ENV GOPROXY=https://proxy.golang.org
+
+COPY main.go /app/
+RUN go mod init golang
+RUN go mod tidy
+
+EXPOSE 8080
+
 ENTRYPOINT [ "go", "run", "main.go" ]
